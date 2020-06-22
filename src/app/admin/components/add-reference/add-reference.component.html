@@ -1,0 +1,46 @@
+<div class=" col-lg-6 crear-referencia titulo">
+	<h1>{{title}}</h1>
+
+	<form #formAdd="ngForm" (ngSubmit)="onSubmit()">
+		<p>
+			<label>Nombre referencia</label>
+			<input type="text" name="name" #name="ngModel" [(ngModel)]="reference.name" class="form-control" placeholder="ejem: Bronco negra" required>
+			<span *ngIf="!name.valid && name.touched">
+				El nombre es obligatorio
+			</span>
+		</p>
+		<p>
+			<label>Codigo</label>
+			<input type="text" name="code" #code="ngModel" [(ngModel)]="reference.code" class="form-control" placeholder="ejem: 556"  required>
+			<span *ngIf="!code.valid && code.touched">
+				El codigo es obligatorio
+			</span>
+		</p>
+
+		<p>
+			<label>Forradura</label>
+			<input type="text" name="forradura" #forradura="ngModel" [(ngModel)]="reference.forradura" class="form-control" placeholder="ejem: Textil"  required>
+			<span *ngIf="!forradura.valid && forradura.touched">
+				La forradura es obligatorio
+			</span>
+		</p>
+
+		<p>
+			<label>Capellada</label>
+			<input type="text" name="capellada" #capellada="ngModel" [(ngModel)]="reference.capellada" class="form-control" placeholder="ejem: cuero"  required>
+			<span *ngIf="!capellada.valid && capellada.touched">
+				La capellada es obligatorio
+			</span>
+		</p>
+
+		<p>
+			<label>Suela</label>
+			<input type="text" name="suela" #suela="ngModel" [(ngModel)]="reference.suela" class="form-control" placeholder="ejem: PU"  required>
+			<span *ngIf="!suela.valid && suela.touched">
+				La capellada es obligatorio
+			</span>
+		</p>
+
+		<input type="submit" value="{{title}}" class="btn btn-success">
+	</form>
+</div>

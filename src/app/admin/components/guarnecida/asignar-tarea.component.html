@@ -1,0 +1,299 @@
+<div class="row ">
+    <div class="row ">
+        <div class="entregar-tarea">
+            <div class=" titulo " >
+                <div class="col-lg-3">
+                    <label class="">
+                        <input type="checkbox" id="cerrado" #cerrado value="cerrado"> Cerrado
+                    </label>
+                <br>
+                <br>
+                    <label class="">
+                        <input type="checkbox" id="pegadaCuello" #pegadaCuello value="pegadaCuello"> Pegada cuellos
+                    </label>
+                </div>
+
+                <div class="col-lg-3">
+                    <label class="">
+                        <input type="checkbox" id="costuraCordonera" #costuraCordonera value="costuraCordonera"> Costura cordonera
+                    </label>
+                    <br>
+                    <br>
+                    <label class="">
+                        <input type="checkbox" id="costuraEmbono" #costuraEmbono value="costuraEmbono"> Costura embono
+                    </label>
+                </div>
+            
+                <div class="col-lg-3">
+                    <label class="">
+                        <input type="checkbox" id="costuraCuello" #costuraCuello value="costuraCuello"> Costura cuellos
+                    </label>
+                    <br>
+                    <br>
+                    <label class="">
+                        <input type="checkbox" id="pegadoLengua" #pegadoLengua value="pegadoLengua"> Pegado lengua
+                    </label>    
+                </div>
+
+                <div class="col-lg-3">
+                    <label class="">
+                        <input type="checkbox" id="costuraRibete" #costuraRibete value="costuraRibete"> Costura ribete
+                    </label>
+                    <br>
+                    <br>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="abollonado" #abollonado value="abollonado"> Abollonado
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+    
+    <div class="entregar-tarea col-lg-8">
+        <div class="col-lg-4 inner-addon ">  
+            <div>
+
+                <span class="titulo">Operario </span>
+            </div>
+            <select  [(ngModel)]="selecOperator" (change)="capturar()" #selecOperario>   
+            <option value="">Elija operario</option>
+            <option *ngFor="let operario of operators" id="opcion"  [value]="operario.name">{{operario.name}}</option>
+
+        </select>
+
+        </div>
+
+        <div class="claseSalidas">
+            <div class="radio-inline radio canasta" > 
+                    
+                    <input type="radio" name="tipoSalida" id="canasta" [(ngModel)]="tipoSalida" #canasta value="canasta">      
+                    <label for="canasta">Canasta  </label>           
+            </div>
+        
+            <div class="radio-inline radio">
+                    
+                    <input type="radio" name="tipoSalida" id="unidad" [(ngModel)]="tipoSalida" #unidad value="unidad" >     
+                    <label for="unidad">Unidad  </label>        
+            </div>                  
+        </div>
+
+        <div class="col-lg-4 inner-addon ">
+            <!-- <div>
+
+                <span class="titulo">Salidas </span>
+            </div>
+            <select [(ngModel)]="tipoSalida">   
+            <option value="">Elija salida</option>
+            <option *ngFor="let salida of salidas" [value]="salida">{{salida}}</option>
+        </select> -->
+
+        
+        </div>    
+
+        
+    </div>
+</div>
+
+    
+
+<br>
+
+
+  <!--SALIDAS POR CANASTA-->
+
+  <div *ngIf="tipoSalida === 'canasta'">
+      <div class="row col-lg-offset-1">
+      <div class=" col-lg-6 inner-addon right-addon">
+          <div align="center" class="titulo">Salidas canasta</div>
+          <input type="text"  class="form-control" #canastaNumero autofocus name="busqueda2"
+           [(ngModel)]="busqueda2" (keyup.enter)="agregarCanasta(); 
+           getGuarnecida()" placeholder="Digite número de canasta y presione enter" autofocus>
+
+           <!-- <div class="col-lg-8 alert alert-danger" role="alert" *ngIf="mostrarReferencia === false ">
+                  NO SE ENCONTRO EL CÓDIGO {{busqueda2}}
+              </div> -->
+
+      </div>
+  </div>
+       <br> 
+
+      <div class="row col-lg-offset-1" *ngIf="tipoSalida">
+
+          <div *ngIf="busqueda2">
+
+              <div *ngFor="let registro of guarnecidaInterna | register: busqueda2">
+                      
+                  <div class="row " *ngIf="mostrarReferencia === true">
+                  <div><input type="hidden" #idCanasta value="{{registro._id}}"></div>
+                  <div class="container" >
+                      <b><div class="col-lg-3 titulo" >Referencia</div></b>
+                      <b><div class="col-lg-3 titulo" >Talla</div></b>
+                      <b><div class="col-lg-3 titulo" >Cantidad</div></b>
+                  </div>
+              </div>
+                  <div *ngFor="let canasta of registro.registros | consolidar : canasta">
+
+                      <div class="container titulo">
+                              
+
+                          <div class="row" *ngIf="mostrarReferencia === true">
+                          <div class="col-lg-3">{{canasta.reference}}</div>
+                          <div class="col-lg-3">{{canasta.size}}</div> 
+                          <div class="col-lg-3">{{canasta.quantity}}</div> 
+                          <!-- <div class="col-lg-4">{{[i+1]}}</div>  -->
+                      </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <br>
+
+      <form #register="ngForm" >
+
+          <div class="col-lg-2 inner-addon col-lg-offset-1" >
+
+              <button type="submit" (click)="updateCanasta(numeroCanasta)" class="btn btn-success">Guardar</button>
+
+          </div>
+      </form>
+  </div>
+
+  
+
+  <!--SALIDAS POR UNIDAD-->
+  <div *ngIf="tipoSalida === 'unidad'" > 
+      <!-- <div class="radio-inline"> 
+          <label>        
+              <input type="radio" name="clasificacion" id="primera" #primera value="primera" checked>Primera        
+          </label>           
+      </div>
+  
+      <div class="radio-inline">
+          <label>        
+              <input type="radio" name="clasificacion" id="segunda" #segunda value="segunda">Segunda        
+          </label>        
+      </div> -->
+
+      
+     
+
+       
+      <div class="col-lg-5 inner-addon right-addon col-lg-offset-1">
+
+          <i class="glyphicon glyphicon-barcode"></i>
+          <input type="text" #bus="ngModel" class="form-control" #lectura autofocus name="lectura" (keyup.enter)="addAddress()" [(ngModel)]="busqueda" placeholder="Lea código de barras" autofocus>
+          <!-- <div class=" alert alert-danger" role="alert" *ngIf="status === false && busqueda"> 
+              NO SE ENCONTRO EL CÓDIGO {{busqueda}}
+          </div> -->
+      </div>
+      <br>
+      <br>
+
+       <div class="container">                  
+          <div class="">
+              <b><div class="col-lg-1 codigo titulo">Código</div></b>
+              <b><div class="col-lg-1 referencia titulo">Referencia</div></b>
+              <b><div class="col-lg-1 talla titulo" >Talla</div></b>                        
+          </div>
+      </div>
+          <div *ngIf="busqueda">
+              <div *ngFor="let registro of guarnecidaInterna ">
+                  <div *ngFor="let codigo of registro.registros | ingresos: busqueda">
+                          
+
+                      <div *ngIf="busqueda === codigo.code ">
+                          <div class="row">
+                              <div><input type="hidden" id="code" #code value="{{codigo.code}}"></div>
+                              <div><input type="hidden" #reference value="{{codigo.reference}}"></div>
+                              <div><input type="hidden" #size value="{{codigo.size}}"></div>
+                              <div><input type="hidden" #idWarehouse value="{{registro._id}}"></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          
+      
+
+      <div class="col-lg-12">
+          <div class="card ">
+              <div class="card-body " id="caja">    
+                  <div class="row caja" >    
+                      <form [formGroup]="formData" (ngSubmit)="addUnidad(formData.value); deleteItem(formData.value)" >
+
+                          <div class="form-group" >
+                              <div id=addresBlock formArrayName="registros" >
+                                  <div *ngFor="let item of addressListArray.controls; let i = index" [formGroupName]="[i]">
+                                      <div class="">
+                                          <div class="col-lg-4">
+                                              <input class="form-control" type="text" [ngModel]="codigo[i]" placeholder="código" formControlName="code">
+                                          </div>
+                                          <div class="col-lg-3">
+                                              <input class="form-control" type="text" [ngModel]="referencia[i]" placeholder="referencia" formControlName="reference">
+                                          </div>
+                                          <div class="col-lg-2">
+                                              <input class="form-control" type="text" [ngModel]="talla[i]" placeholder="talla" formControlName="size">
+                                          </div>
+                                          <div class="col-lg-2">
+                                                  <input class="form-control" type="hidden" [ngModel]="clasificacion[i]" placeholder="id" formControlName="clasification">
+                                          </div>
+                                          <div class="">
+                                              <input class="" type="hidden" [ngModel]="idAlmacen[i]" placeholder="id" formControlName="_id">
+                                          </div>
+                                          <div class="">
+                                              <input class="" type="hidden" [ngModel]="operario[i]" placeholder="id" formControlName="operator">
+                                          </div>
+                                          <div class="">
+                                              <input class="" type="hidden" [ngModel]="cerrar[i]" placeholder="id" formControlName="cerrado">
+                                          </div>
+                                          <div class="">
+                                            <input class="" type="hidden" [ngModel]="pegarCuello[i]" placeholder="id" formControlName="pegadaCuello">
+                                        </div>
+                                        <div class="">
+                                            <input class="" type="hidden" [ngModel]="costurearCordonera[i]" placeholder="id" formControlName="costuraCordonera">
+                                        </div>
+                                        <div class="">
+                                            <input class="" type="hidden" [ngModel]="costurearEmbono[i]" placeholder="id" formControlName="costuraEmbono">
+                                        </div>
+                                        <div class="">
+                                            <input class="" type="hidden" [ngModel]="costurearCuello[i]" placeholder="id" formControlName="costuraCuello">
+                                        </div>
+                                        <div class="">
+                                            <input class="" type="hidden" [ngModel]="pegarLengua[i]" placeholder="id" formControlName="pegadoLengua">
+                                        </div>
+                                        <div class="">
+                                            <input class="" type="hidden" [ngModel]="costurearRibete[i]" placeholder="id" formControlName="costuraRibete">
+                                        </div>
+                                        <div class="">
+                                            <input class="" type="hidden" [ngModel]="abollonar[i]" placeholder="id" formControlName="abollonado">
+                                        </div>
+                                          
+                                          <span>    
+                                              <a class="btn btn-danger" (click)="removeAddress([i])">Eliminar</a>{{' ' + [i+1]}}
+                                          </span>
+                                      </div>
+                                  </div>
+                              </div>    
+                          </div>
+
+                          <div class="col-lg-2 inner-addon">
+                              <button type="submit"   class="btn btn-success">Guardar</button>
+
+                          </div>
+                      </form>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+

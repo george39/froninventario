@@ -1,0 +1,140 @@
+<div class="  col-lg-3  admin-panel no-imprimir"   *ngIf="identity.role == 'ROLE_ADMIN'">
+    <h1 class="titulo">{{title}}</h1>
+    <div class="sidebar-admin " data-example-id="sample-nav-stacked">
+        <ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['listado-tareas']" class="nav-link">Listado tareas</a>
+            </li>
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['listado-operarios']">Listado operarios</a>
+            </li>
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['crear-operario']">
+                    <span class="glyphicon glyphicon-user"></span> Crear operario
+                </a>
+            </li>
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['crear-referencia']">
+                    <span class="glyphicon glyphicon-barcode"></span> Crear referencia
+                </a>
+            </li>
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['crear-tarea']">Crear tarea</a>
+            </li>
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['listado-troquelado']">Listado troquelado</a>
+            </li>
+
+            
+        </ul>
+    </div>
+</div>
+
+
+<!-- MENU ALMACEN 1-->
+<div class=" col-lg-3 col-sx-3 almacen1" *ngIf="identity.role == 'ROLE_ALMACEN1' ">
+    <h1 class="titulo">Almacen 1</h1>
+    <div class="sidebar-admin" data-example-id="sample-nav-stacked">
+        <ul class="nav nav-pills nav-stacked nav-pills-stacked-example">            
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['ingresos-almacen1']">
+                    <span class="glyphicon glyphicon-circle-arrow-right"></span>Ingresos
+                </a>
+            </li>
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['salidas-almacen1']">
+                    <span class="glyphicon glyphicon-circle-arrow-left"></span>Salidas
+
+                </a>
+            </li>            
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['ojaleteado-strobell']">
+                    <span class="glyphicon glyphicon-download-alt"></span>Ojaleteado a Strobell
+
+                </a>
+            </li>
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['strobell-inyeccion']">
+                    <span class="glyphicon glyphicon-download-alt"></span>Strobell a Inyección
+                </a>
+            </li>
+           
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['listado-almacen1']">Listado</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+
+<!-- MENU ALMACEN 2-->
+<div class=" col-lg-3 col-sx-3 almacen1" *ngIf="identity.role === 'ROLE_ALMACEN2' ">
+        <h1 class="titulo">Almacen 2</h1>
+        <div class="sidebar-admin" data-example-id="sample-nav-stacked">
+            <ul class="nav nav-pills nav-stacked nav-pills-stacked-example">            
+                <li role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['ingresos-almacen2']">
+                        <span class="glyphicon glyphicon-circle-arrow-right"></span>Ingresos
+                    </a>
+                </li>
+                <li role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['salidas-almacen2']">
+                        <span class="glyphicon glyphicon-circle-arrow-left"></span>Salidas
+    
+                    </a>
+                </li> 
+                
+                <li role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['vales-terminado']">
+                        <span class="glyphicon glyphicon-circle-arrow-left"></span>Vales terminado
+    
+                    </a>
+                </li>
+
+                <li role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['editar-referencia-almacen2']">
+                        <span class="glyphicon glyphicon-circle-arrow-left"></span>Cambiar referencia/talla
+    
+                    </a>
+                </li>
+
+                <li role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['listado-almacen2']">
+                        <span class="glyphicon glyphicon-circle-arrow-left"></span>Lo que tengo
+    
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+<!-- MENU GUARNECIDA-->
+<div class=" col-lg-3 col-sx-3 menu-guarnecida" *ngIf="identity.role === 'ROLE_GUARNECIDA' ">
+    <h1 class="titulo">Guarnecida</h1>
+    <div class="sidebar-admin" data-example-id="sample-nav-stacked">
+        <ul class="nav nav-pills nav-stacked nav-pills-stacked-example">
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['addguarnecida']" >Ingresos</a>
+            </li>
+
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['salidas-guarnecida']">Salidas</a>
+            </li>
+            <li role="presentation" [routerLinkActive]="['active']">
+                <a [routerLink]="['asignar-tarea-guarnecida']">Entregar tarea</a>
+            </li>            
+
+            <li role="presentation" [routerLinkActive]="['active']">
+                    <a [routerLink]="['listado-guarnecida']">Listado</a>
+                </li>
+
+        </ul>
+    </div>
+</div>
+
+
+<div class="col-lg-8">
+    <router-outlet></router-outlet>
+</div>
