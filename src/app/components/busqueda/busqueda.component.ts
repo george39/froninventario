@@ -108,11 +108,14 @@ export class BusquedaComponent implements OnInit {
         });
       });
 
-      resp.ojaleteado.forEach((item) => {        
-          if (termino === item.reference) {
+      resp.ojaleteado.forEach((item) => {
+        item.registros.forEach((todo) => {
 
-            this.ojaletead.push(item);
+          if (termino === todo.reference) {
+
+            this.ojaletead.push(todo);
           }
+        });
       
       });
 
@@ -176,8 +179,8 @@ export class BusquedaComponent implements OnInit {
       this.guarnecidaInterna = this.guarnInterna;
       this.guarnecidaExterna = this.guarnExterna;
       this.warehouse1 = this.almacen1;
-      this.warehouse2 = this.almacen2;
       this.ojaleteado = this.ojaletead;
+      this.warehouse2 = this.almacen2;
       this.strobell = this.strobel;
       this.injection1 = this.inyeccion;
       this.termination = this.terminacion;
@@ -189,8 +192,8 @@ export class BusquedaComponent implements OnInit {
     this.guarnInterna = [];
     this.guarnExterna = [];
     this.almacen1 = [];
-    this.almacen2 = [];
     this.ojaletead = [];
+    this.almacen2 = [];
     this.strobel = [];
     this.inyeccion = [];
     this.terminacion = [];
